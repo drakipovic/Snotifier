@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-search__field{
+            width: 100% !important;
+        }
+    </style>
+{% endblock %}
+
+{%  block body %}
+    <div class="container-fluid">
+        <div class="row" style="text-align: center; margin-top: 10%">
+
+            <input onclick="showForm()" class="btn btn-success" value="Create new alert" id="mainButton" type="button"/>
+
+        </div>
+        <div class="row" style="margin-top: 5%">
+            <div class="col-md-offset-4 col-md-4">
+                <div id="formPanel" class="panel panel-success" hidden>
+                    <div class="panel-heading">
+                        Create alert
+                    </div>
+                    <div class="panel-body">
+                        <form id="selectForm" class="form-horizontal" method="post" action="/">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Kvart</label>
+                                <div class="col-sm-9">
+                                    <select id="zagrebRegions" name="regions[]" multiple="multiple" class="form-control"
+                                            data-placeholder="Select Zagreb region" style="width: 100%;">
+                                        <option value="Brezovica">Brezovica</option>
+                                        <option value="Donja Dubrava">Donja Dubrava</option>
+                                        <option value="Donji Grad">Donji Grad</option>
+                                        <option value="Gornja Dubrava">Gornja Dubrava</option>
+                                        <option value="Gornji Grad-Medvescak">Gornji Grad - Medvescak</option>
+                                        <option value="Maksimir">Maksimir</option>
+                                        <option value="Novi Zagreb-zapad">Novi Zagreb - zapad</option>
+                                        <option value="Novi Zagre-istok">Novi Zagreb - istok</option>
+                                        <option value="Pescenica Zitnjak">Pescenica Zitnjak</option>
+                                        <option value="Podsljeme">Podsljeme</option>
+                                        <option value="Podsused-Vrapce">Podsused - Vrapce</option>
+                                        <option value="Sesvete">Sesvete</option>
+                                        <option value="Stenjevec">Stenjevec</option>
+                                        <option value="Tresnjevka-Jug">Tresnjevka - Jug</option>
+                                        <option value="Tresnjevka-Sjever">Tresnjevka - Sjever</option>
+                                        <option value="Trnje">Trnje</option>
+                                        <option value="Zagreb-Okolica">Zagreb - Okolica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Raspon cijene u €</label>
+                                <div class="col-sm-4">
+                                    <input id="minPrice" name="fromPrice" class="form-control" type="text" required/>
+                                </div>
+                                <div class="col-sm-1">
+                                    <span style="text-align:center; vertical-align: middle;">_</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input id="maxPrice" name="toPrice" class="form-control" type="text" required/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer" style="text-align: center">
+                        <button onclick="submitForm()" type="submit" class="btn btn-warning">Create alert</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{%  endblock %}
+
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#zagrebRegions").select2();
+        });
+
+        function showForm(){
+            $("#formPanel").show();
+            $("#mainButton").hide();
+        }
+
+        function submitForm(){
+            var minPrice = $("#minPrice").val();
+            var maxPrice = $("#maxPrice").val();
+
+
+
+            $("#selectForm").submit();
+        }
+    </script>
+{% endblock %}
